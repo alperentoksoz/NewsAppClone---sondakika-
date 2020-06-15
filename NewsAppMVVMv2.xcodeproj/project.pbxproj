@@ -15,6 +15,7 @@
 		04A6D782249760D40082CF48 /* HomeNewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04A6D781249760D40082CF48 /* HomeNewCell.swift */; };
 		04A6D7842497612D0082CF48 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04A6D7832497612D0082CF48 /* Extensions.swift */; };
 		04A6D788249769370082CF48 /* FeedController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04A6D787249769370082CF48 /* FeedController.swift */; };
+		04A6D78A2497BB150082CF48 /* Service.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04A6D7892497BB150082CF48 /* Service.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +29,7 @@
 		04A6D781249760D40082CF48 /* HomeNewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeNewCell.swift; sourceTree = "<group>"; };
 		04A6D7832497612D0082CF48 /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		04A6D787249769370082CF48 /* FeedController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedController.swift; sourceTree = "<group>"; };
+		04A6D7892497BB150082CF48 /* Service.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Service.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -87,6 +89,7 @@
 		04A6D77C24975AEA0082CF48 /* API */ = {
 			isa = PBXGroup;
 			children = (
+				04A6D7892497BB150082CF48 /* Service.swift */,
 			);
 			path = API;
 			sourceTree = "<group>";
@@ -197,6 +200,7 @@
 				04A6D788249769370082CF48 /* FeedController.swift in Sources */,
 				04A6D76824975A830082CF48 /* AppDelegate.swift in Sources */,
 				04A6D76A24975A830082CF48 /* SceneDelegate.swift in Sources */,
+				04A6D78A2497BB150082CF48 /* Service.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
