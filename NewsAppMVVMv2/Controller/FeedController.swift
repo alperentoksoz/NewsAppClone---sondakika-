@@ -11,6 +11,7 @@ import UIKit
 private let reuseIdentifier = "NewsCell"
 
 class FeedController: UICollectionViewController {
+    
     // MARK: - Properties
     
     let navigationSettingsButton: UIButton = {
@@ -38,8 +39,17 @@ class FeedController: UICollectionViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        fetchArticles()
         collectionView.register(HomeNewCell.self, forCellWithReuseIdentifier: reuseIdentifier)
+    }
+    
+    // MARK: - API
+    
+    func fetchArticles() {
+        guard let url = URL(string: "http://newsapi.org/v2/top-headlines?category=technology&apiKey=bf68a28867a4477b8194669a6428f7af") else { return }
+        Service.getArticles(url: url) { (articles) in
+
+        }
     }
     
     // MARK: - Selectors
