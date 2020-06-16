@@ -2,9 +2,9 @@
 
 ## Application NewsApp made in Swift 5 with pattern MVVM and newsapi.org API:
 
--Without Xib, all ui created with programmatically
--JSON parsing with decodable protocol
--With MVVM Design Pattern
+- Without Xib, all ui created with programmatically
+- JSON parsing with decodable protocol
+- With MVVM Design Pattern
 
 ## Images
 
