@@ -18,7 +18,6 @@ class HomeNewCell: UICollectionViewCell {
         }
     }
     
-    
     private let newsImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFill

@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import JGProgressHUD
 
 private let reuseIdentifier = "NewsCell"
 
@@ -51,6 +52,11 @@ class FeedController: UICollectionViewController {
     
     func fetchArticles() {
         guard let url = URL(string: "http://newsapi.org/v2/top-headlines?category=technology&apiKey=bf68a28867a4477b8194669a6428f7af") else { return }
+        
+        let hud = JGProgressHUD(style: .dark)
+        hud.textLabel.text = "Loading"
+        hud.show(in: view)
+        
         Service.getArticles(url: url) { (articleList) in
             guard let articleList = articleList?.articles else { return }
 
@@ -59,7 +65,7 @@ class FeedController: UICollectionViewController {
                 self.articleViewModels.append(articleViewmodel)
 
             }
-            
+            hud.dismiss()
             DispatchQueue.main.async {
                   self.collectionView.reloadData()
               }
@@ -131,6 +137,11 @@ extension FeedController {
             cell.articleViewModel = articleViewModel
 
         return cell
+    }
+    
+    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let controller = NewsDetailController(articleListViewModel: articleViewModels)
+        navigationController?.pushViewController(controller, animated: true)
     }
 }
 
