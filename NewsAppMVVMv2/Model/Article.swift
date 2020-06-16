@@ -8,26 +8,18 @@
 
 import Foundation
 
+
 struct ArticleList : Codable {
 
     let articles : [Article]?
 
-    enum CodingKeys: String, CodingKey {
-        case articles = "articles"
-    }
 
 }
-
 struct Article : Codable {
 
     let descriptionField : String?
     let title : String?
     let urlToImage : String?
 
-    enum CodingKeys: String, CodingKey {
-        case descriptionField = "description"
-        case title = "title"
-        case urlToImage = "urlToImage"
-    }
 
 }

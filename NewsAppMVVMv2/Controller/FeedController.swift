@@ -14,6 +14,8 @@ class FeedController: UICollectionViewController {
     
     // MARK: - Properties
     
+    var articleViewModels = [ArticleViewModel]()
+    
     let navigationSettingsButton: UIButton = {
         let button = UIButton(type: .system)
         button.setImage(#imageLiteral(resourceName: "ic_settings_24px"), for: .normal)
@@ -40,16 +42,30 @@ class FeedController: UICollectionViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         fetchArticles()
+        configureUI()
         collectionView.register(HomeNewCell.self, forCellWithReuseIdentifier: reuseIdentifier)
+
     }
     
     // MARK: - API
     
     func fetchArticles() {
         guard let url = URL(string: "http://newsapi.org/v2/top-headlines?category=technology&apiKey=bf68a28867a4477b8194669a6428f7af") else { return }
-        Service.getArticles(url: url) { (articles) in
+        Service.getArticles(url: url) { (articleList) in
+            guard let articleList = articleList?.articles else { return }
 
+            articleList.forEach { (article) in
+                let articleViewmodel = ArticleViewModel(article: article)
+                self.articleViewModels.append(articleViewmodel)
+
+            }
+            
+            DispatchQueue.main.async {
+                  self.collectionView.reloadData()
+              }
         }
+
+  
     }
     
     // MARK: - Selectors
@@ -71,7 +87,7 @@ class FeedController: UICollectionViewController {
     
     func configureUI() {
         view.backgroundColor = .white
-        collectionView.backgroundColor = .systemPink
+        collectionView.backgroundColor = .white
         configureNavigationBar()
         
     }
@@ -97,20 +113,30 @@ class FeedController: UICollectionViewController {
 }
 
 extension FeedController {
+    
+    override func numberOfSections(in collectionView: UICollectionView) -> Int {
+        return 1
+    }
+    
+    
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 5
+        print(articleViewModels.count)
+        return articleViewModels.count
     }
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! HomeNewCell
-        
+
+            let articleViewModel = articleViewModels[indexPath.row]
+
+            cell.articleViewModel = articleViewModel
+
         return cell
     }
 }
 
 extension FeedController: UICollectionViewDelegateFlowLayout {
 func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-    print("DEBUG: \(collectionView.frame.width)")
-    let cgSize = CGSize(width: collectionView.frame.width, height: 200)
+    let cgSize = CGSize(width: collectionView.frame.width, height: 150)
     return cgSize
 }
 }

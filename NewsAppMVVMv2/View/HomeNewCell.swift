@@ -7,9 +7,17 @@
 //
 
 import UIKit
+import SDWebImage
 
 class HomeNewCell: UICollectionViewCell {
     // MARK: - Properties
+    
+    var articleViewModel: ArticleViewModel? {
+        didSet {
+            configure()
+        }
+    }
+    
     
     private let newsImageView: UIImageView = {
         let imageView = UIImageView()
@@ -17,7 +25,7 @@ class HomeNewCell: UICollectionViewCell {
         imageView.clipsToBounds = true
         imageView.layer.borderWidth = 2
         imageView.layer.borderColor = UIColor.white.cgColor
-        imageView.setDimensions(height: 150, width: 150)
+        imageView.setDimensions(height: 100, width: 100)
         imageView.image = #imageLiteral(resourceName: "newsimage")
         
         return imageView
@@ -38,8 +46,6 @@ class HomeNewCell: UICollectionViewCell {
         label.textColor = .black
         label.numberOfLines = 0
         label.font = UIFont.systemFont(ofSize: 14,weight: .medium)
-        label.text = "Haber başlığı Haber başlığı xHaber başlığı Haber başlığı Haber başlığı Haber başlığı Haber başlığı"
-        
         return label
     }()
     
@@ -57,6 +63,12 @@ class HomeNewCell: UICollectionViewCell {
     // MARK: - Selectors
     
     // MARK: - Helpers
+    
+    func configure() {
+        titleLabel.text = articleViewModel?.article.title
+        guard let url = URL(string: (articleViewModel?.article.urlToImage)!) else { return }
+        newsImageView.sd_setImage(with: url, completed: nil)
+    }
     
     func configureUI() {
         backgroundColor = .white
