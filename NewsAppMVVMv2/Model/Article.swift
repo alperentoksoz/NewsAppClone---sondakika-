@@ -9,17 +9,17 @@
 import Foundation
 
 
-struct ArticleList : Codable {
+struct ArticleList : Decodable {
 
     let articles : [Article]?
 
 
 }
-struct Article : Codable {
+struct Article : Decodable {
 
     let descriptionField : String?
     let title : String?
     let urlToImage : String?
-
+    let content: String?
 
 }

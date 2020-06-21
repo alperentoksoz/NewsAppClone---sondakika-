@@ -51,13 +51,13 @@ class FeedController: UICollectionViewController {
     // MARK: - API
     
     func fetchArticles() {
-        guard let url = URL(string: "http://newsapi.org/v2/top-headlines?category=technology&apiKey=bf68a28867a4477b8194669a6428f7af") else { return }
+
         
         let hud = JGProgressHUD(style: .dark)
         hud.textLabel.text = "Loading"
         hud.show(in: view)
         
-        Service.getArticles(url: url) { (articleList) in
+        Service.getArticles() { (articleList) in
             guard let articleList = articleList?.articles else { return }
 
             articleList.forEach { (article) in

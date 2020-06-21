@@ -12,11 +12,16 @@ class NewsDetailCell: UICollectionViewCell {
     
     // MARK: - Properties
     
+    var articleViewModel: ArticleViewModel? {
+        didSet { configure() }
+    }
+    
     let titleLabel: UILabel = {
         let label = UILabel()
-        label.font = UIFont.boldSystemFont(ofSize: 16)
+        label.font = UIFont.boldSystemFont(ofSize: 24)
         label.numberOfLines = 0
         label.text = "başlık"
+        label.textAlignment = .center
         
         return label
     }()
@@ -24,14 +29,15 @@ class NewsDetailCell: UICollectionViewCell {
     let imageView: UIImageView = {
         let imageView = UIImageView()
         imageView.image = #imageLiteral(resourceName: "newsimage")
-        imageView.contentMode = .scaleAspectFill
+        imageView.contentMode = .scaleToFill
+        imageView.clipsToBounds = true
         
         return imageView
     }()
     
-    let descriptionLabel: UILabel = {
+    let contentLabel: UILabel = {
         let label = UILabel()
-        label.font = UIFont.systemFont(ofSize: 12)
+        label.font = UIFont.systemFont(ofSize: 16)
         label.numberOfLines = 0
         label.text = "Description Description Description Description Description Description Description"
         
@@ -43,12 +49,13 @@ class NewsDetailCell: UICollectionViewCell {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
+        backgroundColor = .white
+        configure()
+        configureUI()
         
-        imageView.contentMode = .scaleAspectFill
-        imageView.image = #imageLiteral(resourceName: "jane2")
+//        imageView.contentMode = .scaleAspectFill
+//        imageView.image = #imageLiteral(resourceName: "newsimage")
         
-        addSubview(imageView)
-        imageView.fillSuperview()
     }
     
     required init?(coder: NSCoder) {
@@ -60,13 +67,22 @@ class NewsDetailCell: UICollectionViewCell {
     
     // MARK: - Helpers
     
+    func configure() {
+        titleLabel.text = articleViewModel?.article.title
+        guard let resourceUrl = articleViewModel?.article.urlToImage else { return }
+        guard let url = URL(string: resourceUrl) else { return }
+        imageView.sd_setImage(with: url, completed: nil)
+        contentLabel.text = articleViewModel?.article.content
+    }
+    
     func configureUI() {
         
-        let stack = UIStackView(arrangedSubviews: [titleLabel,imageView,descriptionLabel])
-        stack.spacing = 16
+        imageView.setDimensions(height: 300, width: frame.width)
+        let stack = UIStackView(arrangedSubviews: [titleLabel,imageView, contentLabel])
+        stack.spacing = 32
         stack.axis = .vertical
-        
+
         addSubview(stack)
-        stack.anchor(top:topAnchor,left: leftAnchor,right: rightAnchor, paddingTop: 24)
+        stack.anchor(top:topAnchor,left: leftAnchor,right: rightAnchor, paddingTop: 32,paddingLeft: 10,paddingRight: 10)
     }
 }

@@ -65,7 +65,8 @@ class HomeNewCell: UICollectionViewCell {
     
     func configure() {
         titleLabel.text = articleViewModel?.article.title
-        guard let url = URL(string: (articleViewModel?.article.urlToImage)!) else { return }
+        guard let resourceURL = articleViewModel?.article.urlToImage else { return }
+        guard let url = URL(string: resourceURL) else { return }
         newsImageView.sd_setImage(with: url, completed: nil)
     }
     

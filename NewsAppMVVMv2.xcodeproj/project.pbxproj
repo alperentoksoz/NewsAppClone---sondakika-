@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		04852B5F249E8CE6000342AB /* SegmentedBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04852B5E249E8CE6000342AB /* SegmentedBarView.swift */; };
 		04A6D76824975A830082CF48 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04A6D76724975A830082CF48 /* AppDelegate.swift */; };
 		04A6D76A24975A830082CF48 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04A6D76924975A830082CF48 /* SceneDelegate.swift */; };
 		04A6D76F24975A830082CF48 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 04A6D76D24975A830082CF48 /* Main.storyboard */; };
@@ -25,6 +26,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		04852B5E249E8CE6000342AB /* SegmentedBarView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SegmentedBarView.swift; sourceTree = "<group>"; };
 		04A6D76424975A830082CF48 /* NewsAppMVVMv2.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NewsAppMVVMv2.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		04A6D76724975A830082CF48 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		04A6D76924975A830082CF48 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -134,6 +136,7 @@
 			children = (
 				04A6D781249760D40082CF48 /* HomeNewCell.swift */,
 				04A6D795249935880082CF48 /* NewsDetailCell.swift */,
+				04852B5E249E8CE6000342AB /* SegmentedBarView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -287,6 +290,7 @@
 				04A6D76824975A830082CF48 /* AppDelegate.swift in Sources */,
 				04A6D76A24975A830082CF48 /* SceneDelegate.swift in Sources */,
 				04A6D796249935880082CF48 /* NewsDetailCell.swift in Sources */,
+				04852B5F249E8CE6000342AB /* SegmentedBarView.swift in Sources */,
 				04A6D78A2497BB150082CF48 /* Service.swift in Sources */,
 				04A6D79224992BB60082CF48 /* Constants.swift in Sources */,
 			);
