@@ -28,7 +28,7 @@ class NewsDetailController: UIViewController {
 
     
     private lazy var collectionView: UICollectionView = {
-        let frame = CGRect(x: 0, y: 120, width: view.frame.width, height: 800)
+        let frame = CGRect(x: 0, y: 100, width: view.frame.width, height: 800)
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
         
@@ -45,7 +45,7 @@ class NewsDetailController: UIViewController {
         let button = UIButton(type: .system)
         button.backgroundColor = .lightGray
         button.layer.cornerRadius = 30
-        button.setTitle("< Manşet", for: .normal)
+        button.setTitle("< Headlines", for: .normal)
         button.tintColor = .white
         button.addTarget(self, action: #selector(dismissAl), for: .touchUpInside)
         return button
@@ -76,6 +76,7 @@ class NewsDetailController: UIViewController {
     init(articleListViewModel: [ArticleViewModel]) {
         self.articleViewModels = articleListViewModel
         super.init(nibName: nil, bundle: nil)
+
     }
 
     
@@ -86,6 +87,7 @@ class NewsDetailController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         configureUI()
+
     }
     
     // MARK: - Selectors
@@ -135,7 +137,7 @@ extension NewsDetailController: UICollectionViewDataSource {
      func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! NewsDetailCell
         
-        let articleViewModel = articleViewModels[indexPath.row]
+        let articleViewModel = articleViewModels[indexPath.item]
 
         cell.articleViewModel = articleViewModel
         
@@ -145,10 +147,10 @@ extension NewsDetailController: UICollectionViewDataSource {
 }
 
 extension NewsDetailController: UICollectionViewDelegateFlowLayout {
+    
+
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let height = articleViewModels[indexPath.row].size(forWidth: view.frame.width).height
-        collectionView.frame.size.height = height + 800
-        return CGSize(width: (view.safeAreaLayoutGuide.layoutFrame.width), height: height + 800)
+         return CGSize(width: view.frame.width, height: 800)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
@@ -161,11 +163,5 @@ extension NewsDetailController: UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         return 0
-    }
-}
-
-extension NewsDetailController: UIScrollViewDelegate {
-    func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        
     }
 }

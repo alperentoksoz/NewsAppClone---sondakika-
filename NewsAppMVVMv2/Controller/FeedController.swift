@@ -16,6 +16,7 @@ class FeedController: UICollectionViewController {
     // MARK: - Properties
     
     var articleViewModels = [ArticleViewModel]()
+    private var actionSheetLauncher: ActionSheetLauncher!
     
     let navigationSettingsButton: UIButton = {
         let button = UIButton(type: .system)
@@ -48,6 +49,12 @@ class FeedController: UICollectionViewController {
 
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.navigationBar.barStyle = .default
+        navigationController?.navigationBar.isHidden = false
+    }
+    
     // MARK: - API
     
     func fetchArticles() {
@@ -77,12 +84,17 @@ class FeedController: UICollectionViewController {
     // MARK: - Selectors
     
     @objc func handleSettings() {
-        print("DEBUG: Handle settings")
-        configureNavigationBar()
+        let controller = SettingsController(style: .grouped)
+        let nav = UINavigationController(rootViewController: controller)
+        nav.modalPresentationStyle = .formSheet
+        present(nav,animated: true,completion: nil)
+        
     }
     
     @objc func handleLetterSize() {
-        print("DEBUG: Handle letter size")
+        actionSheetLauncher = ActionSheetLauncher()
+        actionSheetLauncher.show()
+        
     }
     
     @objc func handleSideMenuShow() {
@@ -147,7 +159,7 @@ extension FeedController {
 
 extension FeedController: UICollectionViewDelegateFlowLayout {
 func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-    let cgSize = CGSize(width: collectionView.frame.width, height: 150)
+    let cgSize = CGSize(width: collectionView.frame.width, height: 125)
     return cgSize
 }
 }

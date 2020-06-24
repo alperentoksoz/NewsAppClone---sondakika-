@@ -20,6 +20,7 @@ class NewsDetailCell: UICollectionViewCell {
         let label = UILabel()
         label.font = UIFont.boldSystemFont(ofSize: 24)
         label.numberOfLines = 0
+        label.lineBreakMode = .byWordWrapping
         label.text = "başlık"
         label.textAlignment = .center
         
@@ -36,7 +37,7 @@ class NewsDetailCell: UICollectionViewCell {
     }()
     
     let contentLabel: UILabel = {
-        let label = UILabel()
+        let label = UILabel(frame: CGRect.zero)
         label.font = UIFont.systemFont(ofSize: 16)
         label.numberOfLines = 0
         label.text = "Description Description Description Description Description Description Description"
@@ -44,11 +45,13 @@ class NewsDetailCell: UICollectionViewCell {
         
         return label
     }()
+
     
     // MARK: - Lifecycle
     
     override init(frame: CGRect) {
         super.init(frame: frame)
+        contentView.translatesAutoresizingMaskIntoConstraints = false
         backgroundColor = .white
         configure()
         configureUI()
@@ -76,13 +79,21 @@ class NewsDetailCell: UICollectionViewCell {
     }
     
     func configureUI() {
-        
+
         imageView.setDimensions(height: 300, width: frame.width)
-        let stack = UIStackView(arrangedSubviews: [titleLabel,imageView, contentLabel])
+        let stack = UIStackView(arrangedSubviews: [titleLabel,imageView,contentLabel])
         stack.spacing = 32
         stack.axis = .vertical
 
         addSubview(stack)
         stack.anchor(top:topAnchor,left: leftAnchor,right: rightAnchor, paddingTop: 32,paddingLeft: 10,paddingRight: 10)
+
+        
+
     }
+
+    
+    
 }
+
+

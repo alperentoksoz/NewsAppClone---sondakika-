@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0422431C24A40F8E00E43115 /* ActionSheetLauncher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0422431B24A40F8E00E43115 /* ActionSheetLauncher.swift */; };
+		0445607024A35BA900E19B06 /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0445606F24A35BA900E19B06 /* Settings.swift */; };
+		0468783A24A281C600A006D0 /* SettingsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0468783924A281C600A006D0 /* SettingsController.swift */; };
+		0468783C24A2A25E00A006D0 /* SettingsHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0468783B24A2A25E00A006D0 /* SettingsHeader.swift */; };
 		04852B5F249E8CE6000342AB /* SegmentedBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04852B5E249E8CE6000342AB /* SegmentedBarView.swift */; };
 		04A6D76824975A830082CF48 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04A6D76724975A830082CF48 /* AppDelegate.swift */; };
 		04A6D76A24975A830082CF48 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04A6D76924975A830082CF48 /* SceneDelegate.swift */; };
@@ -26,6 +30,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0422431B24A40F8E00E43115 /* ActionSheetLauncher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionSheetLauncher.swift; sourceTree = "<group>"; };
+		0445606F24A35BA900E19B06 /* Settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
+		0468783924A281C600A006D0 /* SettingsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsController.swift; sourceTree = "<group>"; };
+		0468783B24A2A25E00A006D0 /* SettingsHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsHeader.swift; sourceTree = "<group>"; };
 		04852B5E249E8CE6000342AB /* SegmentedBarView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SegmentedBarView.swift; sourceTree = "<group>"; };
 		04A6D76424975A830082CF48 /* NewsAppMVVMv2.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NewsAppMVVMv2.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		04A6D76724975A830082CF48 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -102,6 +110,7 @@
 			children = (
 				04A6D7832497612D0082CF48 /* Extensions.swift */,
 				04A6D79124992BB60082CF48 /* Constants.swift */,
+				0422431B24A40F8E00E43115 /* ActionSheetLauncher.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -119,6 +128,7 @@
 			children = (
 				04A6D787249769370082CF48 /* FeedController.swift */,
 				04A6D79324992BD10082CF48 /* NewsDetailController.swift */,
+				0468783924A281C600A006D0 /* SettingsController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -137,6 +147,7 @@
 				04A6D781249760D40082CF48 /* HomeNewCell.swift */,
 				04A6D795249935880082CF48 /* NewsDetailCell.swift */,
 				04852B5E249E8CE6000342AB /* SegmentedBarView.swift */,
+				0468783B24A2A25E00A006D0 /* SettingsHeader.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -145,6 +156,7 @@
 			isa = PBXGroup;
 			children = (
 				04A6D78B2497D0070082CF48 /* Article.swift */,
+				0445606F24A35BA900E19B06 /* Settings.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -282,15 +294,19 @@
 			buildActionMask = 2147483647;
 			files = (
 				04A6D78C2497D0070082CF48 /* Article.swift in Sources */,
+				0468783A24A281C600A006D0 /* SettingsController.swift in Sources */,
 				04A6D79424992BD10082CF48 /* NewsDetailController.swift in Sources */,
 				04A6D78E2498156B0082CF48 /* ArticleViewModel.swift in Sources */,
 				04A6D7842497612D0082CF48 /* Extensions.swift in Sources */,
+				0445607024A35BA900E19B06 /* Settings.swift in Sources */,
 				04A6D782249760D40082CF48 /* HomeNewCell.swift in Sources */,
 				04A6D788249769370082CF48 /* FeedController.swift in Sources */,
 				04A6D76824975A830082CF48 /* AppDelegate.swift in Sources */,
 				04A6D76A24975A830082CF48 /* SceneDelegate.swift in Sources */,
 				04A6D796249935880082CF48 /* NewsDetailCell.swift in Sources */,
 				04852B5F249E8CE6000342AB /* SegmentedBarView.swift in Sources */,
+				0468783C24A2A25E00A006D0 /* SettingsHeader.swift in Sources */,
+				0422431C24A40F8E00E43115 /* ActionSheetLauncher.swift in Sources */,
 				04A6D78A2497BB150082CF48 /* Service.swift in Sources */,
 				04A6D79224992BB60082CF48 /* Constants.swift in Sources */,
 			);
