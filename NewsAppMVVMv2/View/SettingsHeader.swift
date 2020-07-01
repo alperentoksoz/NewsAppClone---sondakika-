@@ -48,7 +48,6 @@ class SettingsHeader: UIView {
     // MARK: - Selectors
     
     @objc func dismissAll() {
-        print("test")
         delegate?.dismissAl()
     }
     

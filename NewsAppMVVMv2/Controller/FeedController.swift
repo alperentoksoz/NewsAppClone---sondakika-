@@ -18,6 +18,8 @@ class FeedController: UICollectionViewController {
     var articleViewModels = [ArticleViewModel]()
     private var actionSheetLauncher: ActionSheetLauncher!
     
+    var titleTextSize = CGFloat(14)
+    
     let navigationSettingsButton: UIButton = {
         let button = UIButton(type: .system)
         button.setImage(#imageLiteral(resourceName: "ic_settings_24px"), for: .normal)
@@ -33,12 +35,6 @@ class FeedController: UICollectionViewController {
         return button
     }()
     
-//    let navigationSideMenuButton: UIButton = {
-//        let button = UIButton(type: .system)
-//
-//        return button
-//    }()
-    
     // MARK: - Lifecycle
     
     override func viewDidLoad() {
@@ -46,6 +42,8 @@ class FeedController: UICollectionViewController {
         fetchArticles()
         configureUI()
         collectionView.register(HomeNewCell.self, forCellWithReuseIdentifier: reuseIdentifier)
+        
+       
 
     }
     
@@ -66,6 +64,7 @@ class FeedController: UICollectionViewController {
         
         Service.getArticles() { (articleList) in
             guard let articleList = articleList?.articles else { return }
+            self.articleViewModels.removeAll()
 
             articleList.forEach { (article) in
                 let articleViewmodel = ArticleViewModel(article: article)
@@ -75,6 +74,7 @@ class FeedController: UICollectionViewController {
             hud.dismiss()
             DispatchQueue.main.async {
                   self.collectionView.reloadData()
+                  self.collectionView.refreshControl?.endRefreshing()
               }
         }
 
@@ -94,12 +94,17 @@ class FeedController: UICollectionViewController {
     @objc func handleLetterSize() {
         actionSheetLauncher = ActionSheetLauncher()
         actionSheetLauncher.show()
-        
     }
     
     @objc func handleSideMenuShow() {
         print("DEBUG: Handle show side menu")
     }
+    
+    @objc func handleRefresh() {
+        fetchArticles()
+    }
+    
+
     
     // MARK: - Helpers
     
@@ -107,6 +112,10 @@ class FeedController: UICollectionViewController {
         view.backgroundColor = .white
         collectionView.backgroundColor = .white
         configureNavigationBar()
+        
+        let refreshControl = UIRefreshControl()
+        refreshControl.addTarget(self, action: #selector(handleRefresh), for: .valueChanged)
+        collectionView.refreshControl = refreshControl
         
     }
     
@@ -138,21 +147,20 @@ extension FeedController {
     
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        print(articleViewModels.count)
         return articleViewModels.count
     }
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! HomeNewCell
 
-            let articleViewModel = articleViewModels[indexPath.row]
+        let articleViewModel = articleViewModels[indexPath.row]
 
-            cell.articleViewModel = articleViewModel
+        cell.articleViewModel = articleViewModel
 
         return cell
     }
     
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let controller = NewsDetailController(articleListViewModel: articleViewModels)
+        let controller = NewsDetailController(articleListViewModel: articleViewModels, indexPath: indexPath.row)
         navigationController?.pushViewController(controller, animated: true)
     }
 }
@@ -163,3 +171,4 @@ func collectionView(_ collectionView: UICollectionView, layout collectionViewLay
     return cgSize
 }
 }
+

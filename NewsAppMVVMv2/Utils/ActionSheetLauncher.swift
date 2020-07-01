@@ -10,8 +10,16 @@ import UIKit
 
 private let reuseIdentifier = "SheetCell"
 
-class ActionSheetLauncher: NSObject {
+protocol ActionSheetLauncherDelegate: class {
+    func handleTextSizeChanged(forValue value: CGFloat)
+}
+
+class ActionSheetLauncher: NSObject, UITableViewDelegate {
+    
     // MARK: - Properties
+    
+    
+    weak var delegate: ActionSheetLauncherDelegate?
     
     private let tableView = UITableView(frame: .zero, style: .grouped)
     private var window: UIWindow?
@@ -26,7 +34,6 @@ class ActionSheetLauncher: NSObject {
          view.addGestureRecognizer(tap)
          return view
      }()
-    
     
     // MARK: - Lifecycle
     
@@ -44,8 +51,6 @@ class ActionSheetLauncher: NSObject {
             self.tableView.frame.origin.y += 300
         }
     }
-    
-    // MARK: - Helpers
     
     // MARK: - Helpers
     
@@ -85,23 +90,44 @@ class ActionSheetLauncher: NSObject {
         tableView.layer.cornerRadius = 5
         tableView.isScrollEnabled = false
         
-        tableView.register(UITableViewCell.self, forCellReuseIdentifier: reuseIdentifier)
+        tableView.register(SheetCell.self, forCellReuseIdentifier: reuseIdentifier)
     }
 }
 
 // MARK: - UITableViewDataSource
 
 extension ActionSheetLauncher: UITableViewDataSource {
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 1
+    }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 3
+        return 1
+    }
+    
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        return "Text Size"
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: reuseIdentifier, for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: reuseIdentifier, for: indexPath) as! SheetCell
         
-        cell.textLabel?.text = "test"
-        
+        cell.delegate = self
+    
         return cell
     }
     
+    func sectionIndexTitles(for tableView: UITableView) -> [String]? {
+        return ["Feed Page"]
+    }
+    
+}
+
+
+extension ActionSheetLauncher: SheetCellDelegate {
+    func handleTextSizeChanged(forValue value: CGFloat) {
+
+            delegate?.handleTextSizeChanged(forValue: value)
+
+    }
 }

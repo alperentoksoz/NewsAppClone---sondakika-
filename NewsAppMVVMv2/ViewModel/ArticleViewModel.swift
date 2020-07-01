@@ -10,16 +10,16 @@ import UIKit
 
 struct ArticleViewModel {
     var article : Article
-    
-//    var imageUrl: URL {
-//        return URL(string: article.urlToImage)!
-//    }
 
     init(article: Article) {
         self.article = article
-        
-
     }
+    
+    var timeStamp: String {
+        let timeStamp = String(article.publishedAt[NSRange(location: 11, length: 5)])
+        return timeStamp
+    }
+    
     
     func size(forWidth width: CGFloat) -> CGSize {
         let measurementLabel = UILabel()
@@ -31,4 +31,5 @@ struct ArticleViewModel {
         return measurementLabel.systemLayoutSizeFitting(UIView.layoutFittingCompressedSize)
         
     }
+
 }

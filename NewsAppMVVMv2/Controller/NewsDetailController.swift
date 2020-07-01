@@ -16,6 +16,8 @@ class NewsDetailController: UIViewController {
     
     var articleViewModels = [ArticleViewModel]()
     
+    private var selectedIndexPath: Int!
+    
     private lazy var barStackView = SegmentedBarView(numberOfSegments: articleViewModels.count)
     
     private lazy var mainView: UIView = {
@@ -25,11 +27,12 @@ class NewsDetailController: UIViewController {
         view.clipsToBounds = true
         return view
     }()
-
+    
     
     private lazy var collectionView: UICollectionView = {
-        let frame = CGRect(x: 0, y: 100, width: view.frame.width, height: 800)
+        let frame = CGRect(x: 0, y: 80, width: UIScreen.main.bounds.size.width, height: 800)
         let layout = UICollectionViewFlowLayout()
+        let width = UIScreen.main.bounds.size.width
         layout.scrollDirection = .horizontal
         
         let cv = UICollectionView(frame: frame, collectionViewLayout: layout)
@@ -69,16 +72,15 @@ class NewsDetailController: UIViewController {
         return stack
     }()
     
-
-    
     // MARK: - Lifecycle
     
-    init(articleListViewModel: [ArticleViewModel]) {
+    init(articleListViewModel: [ArticleViewModel], indexPath: Int) {
         self.articleViewModels = articleListViewModel
+        selectedIndexPath = indexPath
         super.init(nibName: nil, bundle: nil)
-
+        
     }
-
+    
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
@@ -87,7 +89,17 @@ class NewsDetailController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         configureUI()
-
+        
+    }
+    
+    override func viewDidLayoutSubviews() {
+        let indexPath = IndexPath(item: selectedIndexPath, section: 0)
+        self.collectionView.scrollToItem(at: indexPath, at: [.centeredVertically, .centeredHorizontally], animated: false)
+        let articleViewModel = articleViewModels[indexPath.item]
+        let captionHeight = articleViewModel.size(forWidth: view.frame.width).height
+        
+        collectionView.frame = CGRect(x: 0, y: 80, width: view.frame.width, height: captionHeight + 850)
+        super.viewDidLayoutSubviews()
     }
     
     // MARK: - Selectors
@@ -100,14 +112,12 @@ class NewsDetailController: UIViewController {
     
     func configureUI() {
         navigationController?.navigationBar.isHidden = true
-    
+        
         view.addSubview(mainView)
         mainView.anchor(top: view.safeAreaLayoutGuide.topAnchor,left: view.leftAnchor,right: view.rightAnchor, paddingTop: 14, paddingLeft: 88, paddingRight: 88, width: 40,height: 20)
-
         
         mainView.addSubview(barStackView)
         barStackView.fillSuperview()
-
         
         view.addSubview(collectionView)
         view.backgroundColor = .white
@@ -122,7 +132,7 @@ class NewsDetailController: UIViewController {
 }
 
 extension NewsDetailController: UICollectionViewDelegate {
-
+    
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
         barStackView.setHightlighted(index: indexPath.row)
     }
@@ -130,15 +140,17 @@ extension NewsDetailController: UICollectionViewDelegate {
 
 
 extension NewsDetailController: UICollectionViewDataSource {
-     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return articleViewModels.count
     }
     
-     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! NewsDetailCell
         
+        cell.delegate = self
+        
         let articleViewModel = articleViewModels[indexPath.item]
-
+        
         cell.articleViewModel = articleViewModel
         
         return cell
@@ -148,9 +160,13 @@ extension NewsDetailController: UICollectionViewDataSource {
 
 extension NewsDetailController: UICollectionViewDelegateFlowLayout {
     
-
+    
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-         return CGSize(width: view.frame.width, height: 800)
+        
+        let articleViewModel = articleViewModels[indexPath.item]
+        let captionHeight = articleViewModel.size(forWidth: view.frame.width).height
+        print("TEST: \(indexPath.row) \(captionHeight)")
+        return CGSize(width: collectionView.bounds.size.width, height: captionHeight + 850)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
@@ -163,5 +179,24 @@ extension NewsDetailController: UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         return 0
+    }
+}
+
+extension NewsDetailController: NewsDetailCellDelegate {
+    func handleSwipe(sender: UISwipeGestureRecognizer) {
+        
+        if sender.direction == .left {
+            print("swiped left")
+            let indexPath = IndexPath(item: selectedIndexPath - 1, section: 0)
+            collectionView.scrollToItem(at: indexPath, at:[.centeredVertically, .centeredHorizontally], animated: true)
+            selectedIndexPath = selectedIndexPath - 1
+        } else if sender.direction == .right {
+              print("swiped right")
+            let indexPath = IndexPath(item: selectedIndexPath + 1, section: 0)
+            collectionView.scrollToItem(at: indexPath, at:[.centeredVertically, .centeredHorizontally], animated: true)
+            selectedIndexPath = selectedIndexPath + 1
+        }
+        
+        
     }
 }

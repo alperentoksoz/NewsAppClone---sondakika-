@@ -13,13 +13,14 @@ struct ArticleList : Decodable {
 
     let articles : [Article]?
 
-
 }
+
 struct Article : Decodable {
 
     let descriptionField : String?
     let title : String?
     let urlToImage : String?
     let content: String?
+    let publishedAt: String
 
 }
