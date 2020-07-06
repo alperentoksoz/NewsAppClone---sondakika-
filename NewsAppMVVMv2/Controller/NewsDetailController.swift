@@ -60,6 +60,7 @@ class NewsDetailController: UIViewController {
         button.layer.cornerRadius = 30
         button.setImage(#imageLiteral(resourceName: "ic_share_24px"), for: .normal)
         button.tintColor = .white
+        button.addTarget(self, action: #selector(handleShare), for: .touchUpInside)
         return button
     }()
     
@@ -106,6 +107,11 @@ class NewsDetailController: UIViewController {
     
     @objc func dismissAl() {
         navigationController?.popViewController(animated: true)
+    }
+    
+    @objc func handleShare() {
+        let activityController = UIActivityViewController(activityItems: [articleViewModels[selectedIndexPath].article.url], applicationActivities: nil)
+        present(activityController,animated: true)
     }
     
     // MARK: - Helpers
