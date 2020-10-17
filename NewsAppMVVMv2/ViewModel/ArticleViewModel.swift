@@ -16,7 +16,7 @@ struct ArticleViewModel {
     }
     
     var timeStamp: String {
-        let timeStamp = String(article.publishedAt[NSRange(location: 11, length: 5)])
+        let timeStamp = String(article.date[NSRange(location: 11, length: 5)])
         return timeStamp
     }
     

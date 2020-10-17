@@ -11,6 +11,7 @@ import UIKit
 
 struct SettingsViewModel {
     
+    
     var textSize: CGFloat
     
     init(textSize: CGFloat) {

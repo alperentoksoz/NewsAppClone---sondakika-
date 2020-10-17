@@ -17,7 +17,6 @@ class SettingsController: UITableViewController {
     
     private let headerView = SettingsHeader()
 
-    
     // MARK: - Lifecycle
     
     override func viewDidLoad() {

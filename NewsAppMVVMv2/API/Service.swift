@@ -7,25 +7,21 @@
 //
 
 import Foundation
+import Alamofire
 
-private let url = URL(string: "HERE NEWS API KEY")
+private let url = "http://newsapi.org/v2/top-headlines?category=technology&apiKey="+API_KEY
 
 class Service {
-        
-        static func getArticles(completion: @escaping (ArticleList?) -> ()) {
     
-            URLSession.shared.dataTask(with: url!) { data, response, error in
-                
-                if let error = error {
-                    print(error.localizedDescription)
-                }
-                else if let data = data {
-                    let json = try? JSONDecoder().decode(ArticleList.self, from: data)
-                    if let json = json {
-            
-                        completion(json)
-                    }
-                }
-            }.resume()
+    static var shared = Service()
+    
+    func getArticles(completion: @escaping (Articles) -> ()) {
+        
+        let request = AF.request(url)
+        .validate()
+            .responseDecodable(of: Articles.self) { (response) in
+                guard let articles = response.value else { return }
+                completion(articles)
         }
+    }
 }

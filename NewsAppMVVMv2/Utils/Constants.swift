@@ -7,3 +7,5 @@
 //
 
 import Foundation
+
+let API_KEY = "API KEY ENTER HERE"

@@ -8,5 +8,6 @@ target 'NewsAppMVVMv2' do
   # Pods for NewsAppMVVMv2
 	pod 'SDWebImage', '~> 5.0'
 	pod 'JGProgressHUD'
+	pod 'Alamofire', '~> 5.2'
 
 end

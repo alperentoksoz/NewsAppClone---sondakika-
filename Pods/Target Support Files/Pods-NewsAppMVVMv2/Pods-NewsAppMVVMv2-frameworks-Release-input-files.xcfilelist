@@ -1,3 +1,4 @@
 ${PODS_ROOT}/Target Support Files/Pods-NewsAppMVVMv2/Pods-NewsAppMVVMv2-frameworks.sh
+${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework
 ${BUILT_PRODUCTS_DIR}/JGProgressHUD/JGProgressHUD.framework
 ${BUILT_PRODUCTS_DIR}/SDWebImage/SDWebImage.framework

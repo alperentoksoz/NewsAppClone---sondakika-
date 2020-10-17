@@ -13,6 +13,7 @@ protocol SettingsHeaderDelegate: class {
 }
 
 class SettingsHeader: UIView {
+    
     // MARK: - Properties
     
     weak var delegate: SettingsHeaderDelegate?

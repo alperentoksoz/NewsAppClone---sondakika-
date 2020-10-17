@@ -62,8 +62,8 @@ class FeedController: UICollectionViewController {
         hud.textLabel.text = "Loading"
         hud.show(in: view)
         
-        Service.getArticles() { (articleList) in
-            guard let articleList = articleList?.articles else { return }
+        Service.shared.getArticles() { (articles) in
+            guard let articleList = articles.all else { return }
             self.articleViewModels.removeAll()
 
             articleList.forEach { (article) in

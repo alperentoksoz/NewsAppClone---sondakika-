@@ -6,22 +6,28 @@
 //  Copyright © 2020 Alperen Toksöz. All rights reserved.
 //
 
-import Foundation
-
-
-struct ArticleList : Decodable {
-
-    let articles : [Article]?
+struct Articles : Decodable {
+    let all : [Article]?
+    
+    enum CodingKeys: String, CodingKey {
+        case all = "articles"
+    }
 
 }
 
 struct Article : Decodable {
-
-    let descriptionField : String?
     let title : String?
     let urlToImage : String?
     let content: String?
-    let publishedAt: String
-    let url: String?
+    let date: String
+    let newsUrl: String?
+    
+    enum CodingKeys: String, CodingKey {
+        case title = "title"
+        case urlToImage = "urlToImage"
+        case content
+        case date = "publishedAt"
+        case newsUrl =  "url"
+    }
 
 }

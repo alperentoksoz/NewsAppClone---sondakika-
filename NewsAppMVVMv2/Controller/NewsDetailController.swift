@@ -110,7 +110,7 @@ class NewsDetailController: UIViewController {
     }
     
     @objc func handleShare() {
-        let activityController = UIActivityViewController(activityItems: [articleViewModels[selectedIndexPath].article.url], applicationActivities: nil)
+        let activityController = UIActivityViewController(activityItems: [articleViewModels[selectedIndexPath].article.newsUrl], applicationActivities: nil)
         present(activityController,animated: true)
     }
     
