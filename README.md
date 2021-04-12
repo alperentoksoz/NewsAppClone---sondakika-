@@ -3,7 +3,9 @@
 ## Application NewsApp made in Swift 5 with pattern MVVM and newsapi.org API:
 
 - Without Xib, all ui created with programmatically
-- JSON parsing with Alamofire
+- JSON mapping with Codable
+- HTTP networking with Alamofire
+- Data pass with Delegation
 - Notification Center
 - Multiple direction collection view for switch between news
 - ActivityController: news sharing for detail page
